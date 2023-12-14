@@ -29,7 +29,8 @@ const CartItem = ({ isMain, cart }) => {
         type: "ADD", addCart: {
           id: cart.id,
           product: cart.product,
-          count: cart.count + value
+          count: cart.count + value,
+
         }
       });
       alert(`상품 ${cart.product}이 추가되었습니다.`);
@@ -52,8 +53,11 @@ const CartItem = ({ isMain, cart }) => {
   return (
     <li className="flex gap-4 justify-between my-4 py-4 px-4 border-[1px] bg-gray-700 rounded-md shadow-xl">
 
-      <div>
+      <div className="flex items-center">
+        <img src={cart.img} alt="" className="w-32 h-32 mr-4" />
         <h2 data-test="title" className="mb-0 text-lg font-bold text-gray-100 uppercase">{cart.product}</h2>
+        <h2 className="mb-0 text-lg text-gray-100 ">{cart.price}</h2>
+
       </div>
 
 
