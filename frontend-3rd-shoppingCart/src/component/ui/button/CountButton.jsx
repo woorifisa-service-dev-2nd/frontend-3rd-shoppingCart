@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
 // import './CustomNumberInput.css'; // Import the CSS file
 
-const CustomNumberInput = () => {
-  const [value, setValue] = useState(0);
-
-  const decrement = () => {
-    setValue((prevValue) => prevValue - 1);
-  };
-
-  const increment = () => {
-    setValue((prevValue) => prevValue + 1);
-  };
+const CustomNumberInput = ({value, decrement, increment}) => {
+  
 
   return (
     <div className="custom-number-input h-10 w-32">
@@ -25,7 +17,7 @@ const CustomNumberInput = () => {
         </button>
         <input
           className="outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-md hover:text-black focus:text-black md:text-base cursor-default flex items-center text-gray-700  outline-none"
-          name="custom-input-number"
+          name="custom-input-number" readOnly
           value={value}
         />
         <button
