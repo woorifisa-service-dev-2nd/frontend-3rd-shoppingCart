@@ -1,7 +1,7 @@
 import { React, createContext, useReducer, useState } from 'react'
 import CartBody from './component/shoppingCart/CartBody'
 import CartForm from './component/shoppingCart/CartForm'
-import { CartContext } from './context/CartContext'
+import { CartContext, CartDispatchContext } from './context/CartContext'
 import { createPortal } from 'react-dom'
 import Modal from './component/ui/Modal'
 import DefaultLayout from './layouts/DefaultLayout'
@@ -9,28 +9,27 @@ import DefaultLayout from './layouts/DefaultLayout'
 const dummyData = [
   {
     id: 1,
-    product: 'React 공부',
-    state: true,
+    product: '가방',
+    count: 1,
   },
   {
     id: 2,
-    product: 'React 공부',
-    state: false,
+    product: '안경',
+    count: 0,
   },
   {
     id: 3,
-    product: 'React 공부',
-    state: false,
+    product: '우산',
+    count: 0,
   }
 ]
 
 const reducer = (carts, action) => {
   switch (action.type){
     case 'ADD':
-      return '';
-
-    case 'UPDATE':
-      return ''
+      const addCarts = carts.map((data)=> data.id=== action.addCart.id ? action.addCart : data);
+      
+      return addCarts;
 
     case 'DELETE':
       return ''
@@ -41,6 +40,11 @@ const removeTodoHandler = (removeTodoId) => {
   console.log(removeTodoId);
   const removeTodos = todos.filter(todo => todo.id !== removeTodoId);
   setTodos(removeTodos);
+}
+
+const addHandler = (addCart)=>{
+  const addCarts = carts.map((data)=> data.id=== addCart.id ? addCart : data);
+
 }
 
 const App = () => {
@@ -60,6 +64,7 @@ const App = () => {
       </header>
       
         <CartContext.Provider value={[carts, openModal, closeModal]}>
+          <CartDispatchContext.Provider value = {dispatch}>
           <div>
             <button onClick={openModal}>장바구니</button>
           </div>
@@ -72,6 +77,7 @@ const App = () => {
             <Modal>
             <CartForm isMain={false}></CartForm>
           </Modal>, document.body)}
+          </CartDispatchContext.Provider>
         </CartContext.Provider>
     </div>
   )

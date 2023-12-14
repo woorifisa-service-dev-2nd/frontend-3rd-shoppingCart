@@ -9,7 +9,7 @@ const CartBody = ({isMain}) => {
   console.log(isMain);
   return (
     <ul className='px-0 my-8'>
-        {carts.map((cart) => (isMain || cart.state===true) && <CartItem isMain={isMain} cart={cart} key = {cart.id}></CartItem>) }
+        {carts.map((cart) => (isMain || cart.count>=1) && <CartItem isMain={isMain} cart={cart} key = {cart.id}></CartItem>) }
     </ul>
   )
 }

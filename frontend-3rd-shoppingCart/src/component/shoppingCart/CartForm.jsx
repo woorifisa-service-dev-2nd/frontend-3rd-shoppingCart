@@ -4,10 +4,8 @@ import CartItem from './CartItem';
 import CartBody from './CartBody';
 
 const CartForm = ({isMain}) => {
-  const carts = useContext(CartContext);
-  const [isOpen, open] = useState(false);
-  const openModal = () => open(true);
-  const closeModal = () => open(false);
+  const [carts, openModal, closeModal] = useContext(CartContext);
+ 
   return (
     <>
             <h3 className="text-3xl text-red-600">Cart</h3>

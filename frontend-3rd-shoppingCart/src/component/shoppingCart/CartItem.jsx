@@ -13,7 +13,7 @@ const CartItem = ({isMain, cart, children}) => {
             </div>
         </div>
         <div className="flex items-center gap-1">
-            {isMain && <IconButton icon={'추가'}/>}
+            {isMain && <IconButton icon={'추가'} cart={cart}/>}
             {!isMain && <IconButton textColor='text-red-300' icon={'🗑'}/>}
         </div>
     </li>
