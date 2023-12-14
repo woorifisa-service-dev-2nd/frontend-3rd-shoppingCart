@@ -1,9 +1,10 @@
 ![header](https://capsule-render.vercel.app/api?type=slice&color=auto&height=300&section=header&text=Shopping%20Cart&fontSize=90)
 
 
-주제 : 장바구니 페이지
+
 
 #  장바구니 페이지
+![image](https://github.com/woorifisa-service-dev-2nd/frontend-3rd-shoppingCart/assets/79794772/2b542f28-2a7a-4648-9b8f-c92fed8cf859)
 
 
 # 1.프로젝트 및 팀(팀원) 소개 
