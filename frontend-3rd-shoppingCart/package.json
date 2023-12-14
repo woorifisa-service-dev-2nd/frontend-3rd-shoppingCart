@@ -22,10 +22,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-<<<<<<< HEAD
     "postcss": "^8.4.32",
-=======
->>>>>>> 0e3fdf6c5f13b49daa4ba3f5a7690aea9d174e17
     "tailwindcss": "^3.3.6",
     "vite": "^5.0.8"
   }
