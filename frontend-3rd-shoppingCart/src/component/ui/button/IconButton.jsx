@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { CartDispatchContext } from '../../../context/CartContext'
+import React from 'react'
+
 
 const IconButton = ({ textColor, icon, onClick}) => {
 

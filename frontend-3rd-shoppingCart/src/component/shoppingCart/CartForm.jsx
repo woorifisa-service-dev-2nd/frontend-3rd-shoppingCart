@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../context/CartContext';
-import CartItem from './CartItem';
+
 import CartBody from './CartBody';
 
 const CartForm = ({isMain}) => {
@@ -8,7 +8,7 @@ const CartForm = ({isMain}) => {
  
   return (
     <>
-            <h3 className="text-3xl text-red-600">Cart</h3>
+            <h3 className="text-3xl text-black">Cart</h3>
             <form className='my-2'>
             <CartBody isMain={isMain}></CartBody>
             <div className='flex justify-end gap-4'>

@@ -5,7 +5,10 @@ export default {
   ],
 
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+      'spin-slow': 'spin 1.8s infinite'
+    }},
   },
   plugins: [],
 }
