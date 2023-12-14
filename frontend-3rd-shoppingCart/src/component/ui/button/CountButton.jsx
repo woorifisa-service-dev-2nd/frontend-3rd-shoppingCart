@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 // import './CustomNumberInput.css'; // Import the CSS file
 
-const CustomNumberInput = ({value, decrement, increment}) => {
-  
+const CustomNumberInput = ({ value, decrement, increment }) => {
+
 
   return (
     <div className="custom-number-input h-10 w-32">
