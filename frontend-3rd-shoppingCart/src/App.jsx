@@ -44,28 +44,33 @@ const App = () => {
   const closeModal = () => open(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <header>
+        <div className="flex justify-center">
+          <a to="/">
+            <h1 className='py-8 text-red-200 max-w-max text-7xl'>Carts</h1>
+          </a>
+        </div>
+        <div>
+        
+        </div>
+       
+      </header>
+      
+          <CartContext.Provider value={carts}>
+            <button onClick={openModal}>장바구니</button>
+            {isOpen && createPortal(
+            <Modal onClose={closeModal}>
+              <CartForm onClose={closeModal}/>
+            </Modal>, document.body)}
+          </CartContext.Provider>
+        
+      <section>
+        <CartContext.Provider value={carts}>
+          <CartBody></CartBody>
+        </CartContext.Provider>
+      </section>
+    </div>
   )
 }
 
