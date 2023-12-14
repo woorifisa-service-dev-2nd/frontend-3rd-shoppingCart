@@ -44,14 +44,16 @@ const App = () => {
   const closeModal = () => open(false);
 
   return (
-    <DefaultLayout>
+    <div>
       <header>
         <div className="flex justify-center">
           <a to="/">
             <h1 className='py-8 text-red-200 max-w-max text-7xl'>Carts</h1>
           </a>
         </div>
+        <div>
         
+        </div>
        
       </header>
       
@@ -63,12 +65,12 @@ const App = () => {
             </Modal>, document.body)}
           </CartContext.Provider>
         
-     <section>
+      <section>
         <CartContext.Provider value={carts}>
           <CartBody></CartBody>
         </CartContext.Provider>
-      </section> 
-    </DefaultLayout>
+      </section>
+    </div>
   )
 }
 
