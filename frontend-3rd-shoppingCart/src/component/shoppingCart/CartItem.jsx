@@ -57,7 +57,7 @@ const CartItem = ({isMain, cart}) => {
               <img src={cart.img} alt="" className="w-32 h-32 mr-4" />
           <div>
             <h2 data-test="title" className="mb-0 text-lg font-bold text-black uppercase">{cart.product}</h2>
-            <p className="mb-0 text-lg text-black">{cart.price}</p>
+            <p className="mb-0 text-lg text-black">{cart.price}원</p>
           </div>
         </div>
             
