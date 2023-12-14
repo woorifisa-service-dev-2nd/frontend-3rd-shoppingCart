@@ -3,10 +3,7 @@ import React, { useState } from 'react'
 import IconButton from '@/component/ui/button/IconButton'
 import { createPortal } from 'react-dom'
 // rafce
-const CartItem = ({cart}) => {
-  const [isOpen, open] = useState(false);
-  const openModal = () => open(true);
-  const closeModal = () => open(false);
+const CartItem = ({isMain, cart, children}) => {
   
   return (
     <li className="flex gap-4 justify-between my-4 py-4 px-4 border-[1px] bg-gray-700 rounded-md shadow-xl">
@@ -16,8 +13,8 @@ const CartItem = ({cart}) => {
             </div>
         </div>
         <div className="flex items-center gap-1">
-            <IconButton icon={'추가'} onClick={openModal}/>
-            <IconButton textColor='text-red-300' icon={'🗑'}/>
+            {isMain && <IconButton icon={'추가'}/>}
+            {!isMain && <IconButton textColor='text-red-300' icon={'🗑'}/>}
         </div>
     </li>
   )

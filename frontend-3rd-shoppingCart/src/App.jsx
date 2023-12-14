@@ -10,7 +10,7 @@ const dummyData = [
   {
     id: 1,
     product: 'React 공부',
-    state: false,
+    state: true,
   },
   {
     id: 2,
@@ -37,6 +37,12 @@ const reducer = (carts, action) => {
   }
 }
 
+const removeTodoHandler = (removeTodoId) => {
+  console.log(removeTodoId);
+  const removeTodos = todos.filter(todo => todo.id !== removeTodoId);
+  setTodos(removeTodos);
+}
+
 const App = () => {
   const [carts, dispatch] = useReducer(reducer, dummyData);
   const [isOpen, open] = useState(false);
@@ -51,25 +57,22 @@ const App = () => {
             <h1 className='py-8 text-red-200 max-w-max text-7xl'>Carts</h1>
           </a>
         </div>
-        <div>
-        
-        </div>
-       
       </header>
       
-          <CartContext.Provider value={carts}>
+        <CartContext.Provider value={[carts, openModal, closeModal]}>
+          <div>
             <button onClick={openModal}>장바구니</button>
-            {isOpen && createPortal(
-            <Modal onClose={closeModal}>
-              <CartForm onClose={closeModal}/>
-            </Modal>, document.body)}
-          </CartContext.Provider>
-        
-      <section>
-        <CartContext.Provider value={carts}>
-          <CartBody></CartBody>
+          </div>
+          <div>
+            <section>
+              <CartBody isMain={true}></CartBody>
+            </section>
+          </div>
+          {isOpen && createPortal(
+            <Modal>
+            <CartForm isMain={false}></CartForm>
+          </Modal>, document.body)}
         </CartContext.Provider>
-      </section>
     </div>
   )
 }
