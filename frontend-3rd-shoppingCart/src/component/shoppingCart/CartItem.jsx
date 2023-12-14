@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import IconButton from '@/component/ui/button/IconButton'
 import { createPortal } from 'react-dom'
 import { CartDispatchContext } from '../../context/CartContext';
+import CustomNumberInput from '../ui/button/CountButton';
 // rafce
 const CartItem = ({isMain, cart, children}) => {
   const dispatch = useContext(CartDispatchContext);
@@ -30,10 +31,11 @@ const CartItem = ({isMain, cart, children}) => {
         <div>
             <div>
                 <h2 data-test="title" className="mb-0 text-lg font-bold text-gray-100 uppercase">{ cart.product }</h2>
+                {isMain && <CustomNumberInput></CustomNumberInput>}
             </div>
         </div>
         <div className="flex items-center gap-1">
-            {isMain && <IconButton icon={'+'} cart={cart} onClick={addEvent}/>}
+            {isMain && <IconButton icon={'+'} onClick={addEvent}/>}
             {!isMain && <IconButton textColor='text-red-300' icon={'🗑'} onClick={deleteEvent}/>}
         </div>
     </li>
