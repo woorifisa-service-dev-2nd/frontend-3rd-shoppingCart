@@ -6,7 +6,15 @@ import { CartDispatchContext } from '../../context/CartContext';
 import CustomNumberInput from '../ui/button/CountButton';
 // rafce
 const CartItem = ({isMain, cart}) => {
+  const [value, setValue] = useState(0);
 
+  const decrement = () => {
+    setValue((prevValue) => prevValue - 1);
+  };
+
+  const increment = () => {
+    setValue((prevValue) => prevValue + 1);
+  };
   
 
 
@@ -16,7 +24,7 @@ const CartItem = ({isMain, cart}) => {
         dispatch({type:"ADD", addCart:{
             id: cart.id,
             product: cart.product,
-            count: cart.count+1
+            count: cart.count+value
         }});
 
         alert(`상품 ${cart.product}이 추가되었습니다.`);
@@ -40,7 +48,7 @@ const CartItem = ({isMain, cart}) => {
             
         
         <div className="flex items-center gap-1">
-            {isMain && <CustomNumberInput></CustomNumberInput>}
+            {isMain && <CustomNumberInput value={value} decrement={decrement} increment={increment}></CustomNumberInput>}
             {isMain && <IconButton icon={'추가'} onClick={addEvent}/>}
 
             {!isMain && <div className="mb-0 text-lg font-bold text-gray-100 uppercase">{cart.count}</div>}
