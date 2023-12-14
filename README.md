@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=slice&color=auto&height=300&section=header&text=Shooping%20Cart&fontSize=90)
+![header](https://capsule-render.vercel.app/api?type=slice&amp;color=auto&amp;height=200&amp;section=header&amp;text=Shopping&amp;fontSize=60&amp;rotate=14&amp;fontAlignY=25&amp;fontAlign=75&amp;descAlignY=43&amp;descAlign=80&amp;&amp;animation=twinkling" style="max-width: 100%;)
 
 
 주제 : 장바구니 페이지
