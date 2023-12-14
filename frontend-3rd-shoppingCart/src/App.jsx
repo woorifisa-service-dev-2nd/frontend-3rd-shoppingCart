@@ -32,7 +32,9 @@ const reducer = (carts, action) => {
       return addCarts;
 
     case 'DELETE':
-      return ''
+      const deleteCarts = carts.map((data)=> data.id=== action.deleteCart.id ? action.deleteCart : data);
+      
+      return deleteCarts;
   }
 }
 
