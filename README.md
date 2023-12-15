@@ -47,54 +47,184 @@
  
 # 5. 핵심 기능 설명 및 구현 방법 📃
 
-## 장바구니 페이지 구현
-### - 장바구니 페이지 구현 부분입니다.
+## 장바구니 메인 페이지 구현
+### - 1.Itemlist에 있는 물품의 수량을 -와+를 사용해 설정.
+### - 1-1.itemlist는 app.jsx에서 dummydata(cart)로 관리.
 
 ```react
-const App = () => {
-  const [carts, dispatch] = useReducer(reducer, dummyData);
+const CartItem = ({isMain, cart}) => {
+  const [value, setValue] = useState(0);
+
+  const decrement = () => {
+    setValue((prevValue) => prevValue > 0 ? prevValue - 1 : 0);
+  };
+
+  const increment = () => {
+    setValue((prevValue) => prevValue + 1);
+  };
+
+return (
+    <li className="flex gap-4 justify-between my-4 py-4 px-4 border-[1px] bg-white rounded-md shadow-xl">
+        
+        <div className="flex items-center">
+              <img src={cart.img} alt="" className="w-32 h-32 mr-4" />
+          <div>
+            <h2 data-test="title" className="mb-0 text-lg font-bold text-black uppercase">{cart.product}</h2>
+            <p className="mb-0 text-lg text-black">{cart.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</p>
+          </div>
+        </div>
+            
+        
+        <div className="flex items-center gap-1">
+            {isMain && <CustomNumberInput value={value} decrement={decrement} increment={increment}></CustomNumberInput>}
+            {isMain && <IconButton icon={'🛒'} onClick={addEvent}/>}
+
+            {!isMain && <div className="mb-0 text-lg font-bold text-black uppercase">{cart.count}</div>}
+            {!isMain && <IconButton textColor='text-red-300' icon={'🗑'} onClick={deleteEvent}/>}
+        </div>
+    </li>
+  )
+}
+```
+
+### - 2.카트 아이콘을 클릭해 장바구니에 담고 모달을 통해 확인.
+### - 2-1.수량선택 0일 경우 alert을 이용해 수량 선택을 알림.
+![image](https://github.com/woorifisa-service-dev-2nd/frontend-3rd-shoppingCart/assets/79794772/e958d1d1-060c-4d11-b77a-cde0f8f61ee8)
+
+### - 2-2. 수량 선택 후 장바구니 버튼 클릭 시 어떤 상품이 추가되었는지 alert를 통해 알림.
+![image](https://github.com/woorifisa-service-dev-2nd/frontend-3rd-shoppingCart/assets/79794772/9783a92c-9c69-4c36-b41e-7eb47405850c)
+
+
+### - 3.헤더에 위치한 cart 버튼을 눌러 장바구니 item 목록을 모달창을 통해 확인.
+```react
+const CartForm = ({isMain}) => {
+  
+ 
+  return (
+    <>
+            <h3 className="text-3xl text-black">Cart</h3>
+            <form className='my-2'>
+            <CartBody isMain={isMain}></CartBody>
+            <Subtotal/>
+            <div className='flex justify-end gap-4'>
+            
+            </div>
+            </form>
+        </>
+  )
+}
+
+```
+
+### - 3-1.장바구니에 담는 기능과 삭제하는 기능은 App.jsx의 reducer(dispatch)로 관리.
+```react
+const dispatch = useContext(CartDispatchContext);
+
+    const addEvent = ()=>{
+      if(value === 0){
+        alert('수량을 추가해주세요');
+      }
+      else{
+        dispatch({type:"ADD", addCart:{
+            id: cart.id,
+            product: cart.product,
+            count: cart.count+value,
+            price: cart.price,
+            img: cart.img
+        }});
+
+        setValue(0);
+
+        alert(`상품 ${cart.product}이 추가되었습니다.`);
+      }
+
+    }
+    const deleteEvent = ()=>{
+        dispatch({type:"DELETE", deleteCart:{
+            id: cart.id,
+            product: cart.product,
+            count: 0,
+            price: cart.price,
+            img: cart.img
+        }})
+
+        
+    }
+  return (
+    <li className="flex gap-4 justify-between my-4 py-4 px-4 border-[1px] bg-white rounded-md shadow-xl">
+        
+        <div className="flex items-center">
+              <img src={cart.img} alt="" className="w-32 h-32 mr-4" />
+          <div>
+            <h2 data-test="title" className="mb-0 text-lg font-bold text-black uppercase">{cart.product}</h2>
+            <p className="mb-0 text-lg text-black">{cart.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</p>
+          </div>
+        </div>
+            
+        
+        <div className="flex items-center gap-1">
+            {isMain && <CustomNumberInput value={value} decrement={decrement} increment={increment}></CustomNumberInput>}
+            {isMain && <IconButton icon={'🛒'} onClick={addEvent}/>}
+
+            {!isMain && <div className="mb-0 text-lg font-bold text-black uppercase">{cart.count}</div>}
+            {!isMain && <IconButton textColor='text-red-300' icon={'🗑'} onClick={deleteEvent}/>}
+        </div>
+    </li>
+  )
+```
+
+### - 3-2.modal은 contextAPI를 사용해 관리.
+```react
+const [carts, dispatch] = useReducer(reducer, dummyData);
   const [isOpen, open] = useState(false);
   const openModal = () => open(true);
   const closeModal = () => open(false);
 
   return (
     <div>
-      <header>
-        <div className="flex justify-center">
-          <a to="/">
-            <h1 className='animate-spin-slow py-8 text-black max-w-max text-7xl'>Shopping List</h1>
-          </a>
-        </div>
-      </header>
+      <ShoppingHeader/>
       
-        <CartContext.Provider value={[carts, openModal, closeModal]}>
+        <CartContext.Provider value={[carts, openModal, closeModal, isOpen]}>
           <CartDispatchContext.Provider value = {dispatch}>
-          <div className='max-w-xl mx-auto min-w-[20rem]'>
-
-            <div className='flex justify-end'>
-            <button className="inline-flex items-center rounded-md text-xl font-semibold  bg-blue-600 px-5 py-2 text-white ring-1 ring-inset ring-gray-500/10" onClick={openModal}>Cart</button>
-            </div>
-            
-
-              <section>
-                <CartBody isMain={true}></CartBody>
-              </section>
-            
-            {isOpen && createPortal(
-              <Modal>
-              <CartForm isMain={false}></CartForm>
-            </Modal>, document.body)}
-
-          </div>
+          <ShoppingBody/>
           </CartDispatchContext.Provider>
         </CartContext.Provider>
     </div>
   )
-}
 ```
 
+### - 3-3.장바구니에 담긴 item들의 총 금액을 계산해주는 기능.
+```react
+const Subtotal = () => {
+  const [carts, openModal, closeModal] = useContext(CartContext);
 
+  const calculateSubtotal = () => {
+    return carts.reduce((total, item) => total + item.price * item.count, 0);
+  };
 
+  return (
+    
+    <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+    <div className="flex justify-between text-base font-medium text-gray-900">
+      <p>Order Total</p>
+      <p>{`${calculateSubtotal().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</p>
+    </div>
+    <div className="mt-6">
+      <a href="#" className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+    </div>
+    <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+      <p>
+        
+        <button type="button" onClick={closeModal} className="font-medium text-indigo-600 hover:text-indigo-500">
+          Continue Shopping
+          <span aria-hidden="true"> &rarr;</span>
+        </button>
+      </p>
+    </div>
+  </div>
+  );
+};
+```
 ---
 
 # 6. 트러블 슈팅 💢
@@ -108,13 +238,11 @@ const App = () => {
 ### 3. 저장소에 git push시 github 에러 The requested URL returned error: 403 발생.<br />
  - 토큰 관련 문제를 확인 후 프로젝트의 저장소 주소를 가져온 뒤 github의 생성된 토큰과 주소를 합쳐 세팅을 통해 해당 문제를 해결
    
-  
-
 
 ---
   
 # 7. 팀원 회고(느낀점)😲
-- 박재현 - 
+- 박재현 - 다시한번 React에 대해 복습할수있는 시간이라 좋았고 ContextAPI의 좋은 점을 확실히 느끼는 프로젝트였습니다.
 - 윤이솔 - contextAPI와 reducer에 대해 이해할 수 있는 프로젝트였습니다.
 - 임다빈 - 
 
