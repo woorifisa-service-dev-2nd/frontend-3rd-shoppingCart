@@ -4,6 +4,7 @@ import CartForm from './component/shoppingCart/CartForm'
 import { CartContext, CartDispatchContext } from './context/CartContext'
 import { createPortal } from 'react-dom'
 import Modal from './component/ui/Modal'
+import ShoppingCart from './component/shoppingCart/Subtotal'
 
 
 const dummyData = [
