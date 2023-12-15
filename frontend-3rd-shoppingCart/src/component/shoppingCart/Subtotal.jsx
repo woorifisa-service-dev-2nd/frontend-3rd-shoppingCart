@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {  useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 
 const Subtotal = () => {
@@ -13,7 +13,7 @@ const Subtotal = () => {
     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
     <div className="flex justify-between text-base font-medium text-gray-900">
       <p>Order Total</p>
-      <p>{calculateSubtotal()}</p>
+      <p>{`${calculateSubtotal().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</p>
     </div>
     <div className="mt-6">
       <a href="#" className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>

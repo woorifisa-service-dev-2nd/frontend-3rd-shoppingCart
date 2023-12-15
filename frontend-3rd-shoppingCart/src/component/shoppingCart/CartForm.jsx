@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { CartContext } from '../../context/CartContext';
+import React from 'react'
 
 import CartBody from './CartBody';
 import Subtotal from './Subtotal';
 
 const CartForm = ({isMain}) => {
-  const [carts, openModal, closeModal] = useContext(CartContext);
+  
  
   return (
     <>
@@ -14,7 +13,7 @@ const CartForm = ({isMain}) => {
             <CartBody isMain={isMain}></CartBody>
             <Subtotal/>
             <div className='flex justify-end gap-4'>
-            {/* <button onClick={closeModal}>닫기</button> */}
+            
             </div>
             </form>
         </>

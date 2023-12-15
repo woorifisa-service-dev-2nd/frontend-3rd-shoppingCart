@@ -4,7 +4,7 @@ import IconButton from '@/component/ui/button/IconButton'
 
 import { CartDispatchContext } from '../../context/CartContext';
 import CustomNumberInput from '../ui/button/CountButton';
-// rafce
+
 const CartItem = ({isMain, cart}) => {
   const [value, setValue] = useState(0);
 
@@ -48,7 +48,7 @@ const CartItem = ({isMain, cart}) => {
             img: cart.img
         }})
 
-        console.log(cart.count);
+        
     }
   return (
     <li className="flex gap-4 justify-between my-4 py-4 px-4 border-[1px] bg-white rounded-md shadow-xl">
@@ -57,7 +57,7 @@ const CartItem = ({isMain, cart}) => {
               <img src={cart.img} alt="" className="w-32 h-32 mr-4" />
           <div>
             <h2 data-test="title" className="mb-0 text-lg font-bold text-black uppercase">{cart.product}</h2>
-            <p className="mb-0 text-lg text-black">{cart.price}원</p>
+            <p className="mb-0 text-lg text-black">{cart.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</p>
           </div>
         </div>
             

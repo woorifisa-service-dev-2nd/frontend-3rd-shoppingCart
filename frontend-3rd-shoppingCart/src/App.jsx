@@ -1,10 +1,9 @@
-import { React, createContext, useReducer, useState } from 'react'
-import CartBody from './component/shoppingCart/CartBody'
-import CartForm from './component/shoppingCart/CartForm'
+import { React, useReducer, useState } from 'react'
+
 import { CartContext, CartDispatchContext } from './context/CartContext'
-import { createPortal } from 'react-dom'
-import Modal from './component/ui/Modal'
-import ShoppingCart from './component/shoppingCart/Subtotal'
+
+import ShoppingHeader from './component/main/ShoppingHeader'
+import ShoppingBody from './component/main/ShoppingBody'
 
 
 const dummyData = [
@@ -55,33 +54,11 @@ const App = () => {
 
   return (
     <div>
-      <header>
-        <div className="flex justify-center">
-          <a to="/">
-            <h1 className='animate-spin-slow py-8 text-black max-w-max text-7xl'>Shopping List</h1>
-          </a>
-        </div>
-      </header>
+      <ShoppingHeader/>
       
-        <CartContext.Provider value={[carts, openModal, closeModal]}>
+        <CartContext.Provider value={[carts, openModal, closeModal, isOpen]}>
           <CartDispatchContext.Provider value = {dispatch}>
-          <div className='max-w-xl mx-auto min-w-[20rem]'>
-
-            <div className='flex justify-end'>
-            <button className="inline-flex items-center rounded-md text-xl  bg-indigo-600 shadow-sm hover:bg-indigo-700 px-5 py-2 text-white ring-1 ring-inset ring-gray-500/10" onClick={openModal}>Cart</button>
-            </div>
-            
-
-              <section>
-                <CartBody isMain={true}></CartBody>
-              </section>
-            
-            {isOpen && createPortal(
-            <Modal>
-              <CartForm isMain={false}></CartForm>
-            </Modal>, document.body)}
-
-          </div>
+          <ShoppingBody/>
           </CartDispatchContext.Provider>
         </CartContext.Provider>
     </div>
