@@ -95,22 +95,29 @@ return (
 ![image](https://github.com/woorifisa-service-dev-2nd/frontend-3rd-shoppingCart/assets/79794772/9783a92c-9c69-4c36-b41e-7eb47405850c)
 
 
-### - 3.헤더에 위치한 cart 버튼을 눌러 장바구니 item 목록을 모달창을 통해 확인.
+### - 3. cart 버튼을 눌러 장바구니 item 목록을 모달창을 통해 확인.
 ```react
-const CartForm = ({isMain}) => {
-  
- 
+const ShoppingBody = () => {
+    const [carts, openModal, closeModal, isOpen] =  useContext(CartContext);
+
   return (
-    <>
-            <h3 className="text-3xl text-black">Cart</h3>
-            <form className='my-2'>
-            <CartBody isMain={isMain}></CartBody>
-            <Subtotal/>
-            <div className='flex justify-end gap-4'>
-            
+    <div className='max-w-xl mx-auto min-w-[20rem]'>
+
+            <div className='flex justify-end'>
+            <button className="inline-flex items-center rounded-md text-xl  bg-indigo-600 shadow-sm hover:bg-indigo-700 px-5 py-2 text-white ring-1 ring-inset ring-gray-500/10" onClick={openModal}>Cart</button>
             </div>
-            </form>
-        </>
+            
+
+              <section>
+                <CartBody isMain={true}></CartBody>
+              </section>
+            
+            {isOpen && createPortal(
+            <Modal>
+              <CartForm isMain={false}></CartForm>
+            </Modal>, document.body)}
+
+          </div>
   )
 }
 
