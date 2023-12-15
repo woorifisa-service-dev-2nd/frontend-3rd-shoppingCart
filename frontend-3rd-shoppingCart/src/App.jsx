@@ -68,7 +68,7 @@ const App = () => {
           <div className='max-w-xl mx-auto min-w-[20rem]'>
 
             <div className='flex justify-end'>
-            <button className="inline-flex items-center rounded-md text-xl font-semibold  bg-blue-600 px-5 py-2 text-white ring-1 ring-inset ring-gray-500/10" onClick={openModal}>Cart</button>
+            <button className="inline-flex items-center rounded-md text-xl  bg-indigo-600 shadow-sm hover:bg-indigo-700 px-5 py-2 text-white ring-1 ring-inset ring-gray-500/10" onClick={openModal}>Cart</button>
             </div>
             
 
@@ -77,7 +77,7 @@ const App = () => {
               </section>
             
             {isOpen && createPortal(
-              <Modal>
+            <Modal>
               <CartForm isMain={false}></CartForm>
             </Modal>, document.body)}
 

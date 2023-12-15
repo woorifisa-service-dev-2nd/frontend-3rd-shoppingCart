@@ -14,7 +14,7 @@ const CartForm = ({isMain}) => {
             <CartBody isMain={isMain}></CartBody>
             <Subtotal/>
             <div className='flex justify-end gap-4'>
-            <button onClick={closeModal}>닫기</button>
+            {/* <button onClick={closeModal}>닫기</button> */}
             </div>
             </form>
         </>
