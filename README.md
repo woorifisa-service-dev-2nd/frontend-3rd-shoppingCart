@@ -100,7 +100,7 @@ const App = () => {
 ### 1. 모달창 종료 후 메인창이 새로고침 되는 현상 발생.<br />
  - app.js에서 useState를 통해 생성한 openModal, closeModal함수를 Context로 전달해 사용하여 문제 해결
 
-### 2. CartItem의 장바구니 추가버튼과 삭제버튼을 각각 메인창과 모달창에서 따로 보여줘야하기 때문에 children과 startsWith 함수를 사용하여 컨트롤하려 했으나 위의 문제때문에 컨트롤이 안되는 현상 발생.<br />
+### 2. children과 startsWith 함수를 사용하여 CartItem의 장바구니 추가/삭제버튼을 메인창과 모달창에서 따로 컨트롤하지 못하는 현상 발생.<br />
  - isMain 변수가 true인지 false인지를 CartBody와 CartForm에 인자값으로 전달하여 문제 해결
  - 1의 문제 때문에 실행이 안되었던 것으로 현재는 해당 코드로 실행시켜도 정상 작동할 것으로 생각됨
 
